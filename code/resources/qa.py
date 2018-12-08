@@ -19,6 +19,14 @@ class Qa(Resource):
                         help="This field cannot be left blank!"
                         )
 
+    def get(self,qa_id):
+        qa_session = QaModel.get_by_id(qa_id)
+
+        if qa_session:
+            return qa_session.json()
+        else:
+            {"message":"The QA session was not found"}, 404
+
     ##POST method
     def post(self):
         ##Parse arguments from request and store in 'request_data'

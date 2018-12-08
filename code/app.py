@@ -17,7 +17,7 @@ def create_tables():
 
 #Set resource routes here
 api.add_resource(Qa,'/qa', endpoint='qa')
-api.add_resource(Qa, '/qa/<int:qa_id>',endpoint='qa_id')
+api.add_resource(Qa,'/qa/<int:qa_id>',endpoint='qa_id')
 api.add_resource(Question,'/question/<int:qa_id>', endpoint='question')
 api.add_resource(Answer,'/answer/<int:question_id>', endpoint='answer')
 api.add_resource(QuestionList,'/qa/<int:qa_id>/questions', endpoint='questions')
