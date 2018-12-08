@@ -23,7 +23,7 @@ class Answer(Resource):
 
         ##Allow answering a question if not already answered
         if question and not question.is_answered():
-            question.add_answer(request_data["text"].strip(),request_data["image_url"].strip(),request_data["answered_by"].strip())
+            question.add_answer(request_data["text"],request_data["image_url"],request_data["answered_by"])
             try:
                 question.update_db()
             except:

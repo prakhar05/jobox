@@ -6,7 +6,7 @@ class Qa(Resource):
     ##define request parser and fields to be parsed from the request body
     parser = reqparse.RequestParser()
     parser.add_argument('session_name')
-    parser.add_argument('host_user',
+    parser.add_argument('host_name',
                         required=True,
                         help="This field cannot be left blank!"
                         )
@@ -33,7 +33,11 @@ class Qa(Resource):
 
         ##if no session name gives, define a default name
         if not request_data["session_name"]:
-            request_data["session_name"] = request_data["host_user"]+"'s session"
+            request_data["session_name"] = request_data["host_name"]+"'s session"
+
+        ##validate start and endtime can be converted to time
+        if not QaModel.validate_time(request_data["start_time"],request_data["end_time"]):
+            return {"message":"Please enter valid UTC epoch time string for start_time and end_time where start_time < end_time"}, 400
 
         ##Create a QA session object using the parsed request_data
         qa_session = QaModel(**request_data)
