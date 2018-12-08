@@ -24,8 +24,7 @@ class Qa(Resource):
 
         if qa_session:
             return qa_session.json()
-        else:
-            {"message":"The QA session was not found"}, 404
+        return {"message":"The QA session was not found"}, 404
 
     ##POST method
     def post(self):

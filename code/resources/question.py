@@ -25,10 +25,10 @@ class Question(Resource):
 
             request_data = Question.parser.parse_args()
 
-            if QuestionModel.question_exists(qa_id,request_data["text"],request_data["asked_by_user"]):
+            if QuestionModel.question_exists(qa_id,request_data["text"].strip(),request_data["asked_by_user"].strip()):
                 return {"message":"This question already exists for this session"}, 400
 
-            question = QuestionModel(qa_id,request_data["text"],request_data["asked_by_user"])
+            question = QuestionModel(qa_id,request_data["text"].strip(),request_data["asked_by_user"].strip())
 
             try:
                 question.save_to_db()
