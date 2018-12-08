@@ -25,7 +25,7 @@ class Question(Resource):
 
             request_data = Question.parser.parse_args()
 
-            if QuestionModel.question_exists(request_data["text"],request_data["asked_by_user"]):
+            if QuestionModel.question_exists(qa_id,request_data["text"],request_data["asked_by_user"]):
                 return {"message":"This question already exists for this session"}, 400
 
             question = QuestionModel(qa_id,request_data["text"],request_data["asked_by_user"])

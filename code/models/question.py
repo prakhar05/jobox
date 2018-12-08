@@ -37,15 +37,15 @@ class QuestionModel(db.Model):
 
     ##Return matching questions
     @classmethod
-    def question_exists(cls,text,asked_by_user):
-        return cls.query.filter(cls.text==text,cls.asked_by_user==asked_by_user).first()
+    def question_exists(cls,qa_id,text,asked_by_user):
+        return cls.query.filter(cls.qa_id==qa_id,cls.text==text,cls.asked_by_user==asked_by_user).first()
 
     ##return questions based on question_id
     @classmethod
     def get_by_id(cls,id):
         return cls.query.filter_by(id=id).first()
 
-    ##return all questions based on session id, and filter 
+    ##return all questions based on session id, and filter
     @classmethod
     def get_all_by_id(cls,qa_id,type):
         if type==None or type=="all":
