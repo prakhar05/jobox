@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0860)https://mail-attachment.googleusercontent.com/attachment/u/1/?ui=2&ik=3c9505c43a&attid=0.1&permmsgid=msg-f:1618973348800155603&th=1677bfaedc0ecfd3&view=att&disp=inline&realattid=f_jpahqivy0&saddbat=ANGjdJ-8yNZ7Ly9e4qfgVWWeuUtOB4biwifv5FBB-%2DOLk9CuZFbx8EJ5ZyXHSSmELDXmlhF1KX6B5ycCsS8dKqyF3TgW05-4D77mzO-xkHgDe56G1EB2D-bM_Dl0K4h5i6gg1gd6LxvMGJu_-13vJnb1gLvGdEPNOv8GBA9c3Zkq1bBan3DtpXQJT5zxJEvVTP1zxVjzTRvgpZooqw_e6OiHyFDqi3PpGJ4wqG34IxlSV-pbZucQvb5lu3wkEt6VDxrAIkxATvtGdadyZgPPJDDRg9UBYLd1O_Cootxa_4cVhl4ZLvQsKZ6-tZOHUxd59HJS4wRM0Bh_j6md55l2oxTlTErxPB1sqhbftTgZC5aX-6Jzw5T_Wh9VUxjXo0UHge6aQf_ibrj1hLb8WI1TlQJ0R7QGczDLCqxkEjnqBAhYDt4WdTDMRemiUL2xsS0Mux3dlbaRTk-luKp3Lf8_9cxY_lXDk21kCJ4ZHByCW9ueXIhKvLH_drgcH1BsicUXaHtpcUZmkXw0DZV7EXFH5jgUgNaojJpaZhwzF2kq2mdiehH251swXTfiQWhMetNVyGrXQwAHQub9lNEQAVCqgJFTwZEz9hg9FOPsWHTw8IUXPXoT7XVVO_et7EeICsFvKdWVQzgxuwPL_rkhj6DT -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body>
+
+
+
+
+
+  <div>
+
+      <h2>Worktest</h2>
+      <p> Your task is to design and implement data schemas and corresponding HTTP server endpoints for a professional athlete hosting a Question &amp; Answer session with fans.</p>
+      <p>Using an HTTP server and data store of your choosing, please implement the REST-like endpoints listed below.</p>
+      <p>Each task details a minimum set of required data attributes, add more as you deem necessary.</p>
+      <p>The routes in the task list are only suggestions, modify them however you see fit.</p>
+      <p>Be prepared to discuss any benefits, limitations, and tradeoffs of your design after the exercise.</p>
+      <br>
+      <p>This webpage is meant to help you test your implementation, feel free to make modifications in order to get it talking with your server.</p>
+      <p>By default, this webpage expects an HTTP server running on <strong><a href="http://localhost:8080/" target="_blank">http://localhost:8080</a></strong> that accepts and returns all data in JSON format.</p>
+      <p>It also attempts to make requests to the example routes, so if you make changes to the routes, you will also need to change the JavaScript on the page code.</p>
+      <p>Feel free to ask us any questions you may have.</p>
+      <br>
+      <p>When you are finished, please email your source code (including your version of this HTML file if you made any modifications) along with directions for launching the server and data store to <a href="mailto:kaushik@jobox.ai" target="_blank">kaushik@jobox.ai</a> or give us a link to your GitHub.</p>
+
+
+
+      <h3>Tasks</h3>
+      <p>*Note: All data models are expected to have some sort of <strong>id</strong> field. All user models must have at least a <strong>name</strong> attribute.</p>
+      <ul>
+        <li>
+          <p>1. Create a QA session. QA sessions must have a <strong>host</strong> user, a <strong>start_time</strong>, and an <strong>end_time</strong>.</p>
+          <code>POST /qa</code>
+        </li>
+        <li>
+          <p>2. Retrieve a QA session.</p>
+          <code>GET /qa/:qa_id</code>
+        </li>
+        <li>
+          <p>3. Ask a question. Questions are within the context of a single QA session and must contain <strong>text</strong> and an <strong>asked_by</strong> user.</p>
+          <code>POST /question/:qa_id</code>
+        </li>
+        <li>
+          <p>4. Answer a question. Can assume one answer per question. An answer can allow for either <strong>text</strong> and/or <strong>image_url</strong> as a response. It must also have an <strong>answered_by</strong> user.</p>
+          <code>POST /answer/:question_id</code>
+        </li>
+        <li>
+          <p>5. Retrieve a list of questions for a given QA session. Allow for the option of filtering answered vs. non-answered questions.</p>
+          <p>Each question in the result list must contain all relevant expanded models. IE: the asked_by user, the answer (if there was one), and the answered_by user.</p>
+          <code>GET /qa/:qa_id/questions</code>
+        </li>
+      </ul>
+
+
+
+      <h3>Testing</h3>
+      <p>Form fields are sent to the server as JSON in POST requests. EX: the host_name and start_time fields are sent as {host_name: value, start_time: value}. ID fields may be sent as part of the URL depending on the endpoint. EX: qa_id = 1234 is included in the URL as /qa/1234</p>
+      <p>If you see 'Access control...' type errors in the browser developer console, read the comments in the JavaScript source code of this HTML page regarding 'CORS'.</p>
+      <form action="http://127.0.0.1:8080/qa" enctype="application/json" method="post">
+        <fieldset>
+          <legend>1. Create Q&amp;A Session</legend>
+          <input name="host_name" type="text">
+          <input name="start_time">
+          <input name="end_time">
+          <button type="submit">POST</button>
+        </fieldset>
+        <div></div>
+        <a title="Clear">X</a>
+        <div></div>
+        <pre><code></code></pre>
+      </form>
+
+      <script>
+      function getsession()
+      {
+        var url="http://127.0.0.1:8080/qa/"+document.getElementById("qa_id").value;
+        location.href=url
+        return false;
+      }
+      </script>
+      <form onsubmit="return getsession();">
+        <fieldset>
+          <legend>2. Get Q&amp;A Session</legend>
+          <input name="qa_id" id="qa_id">
+          <button type="submit">GET</button>
+        </fieldset>
+        <div></div>
+        <a title="Clear">X</a>
+        <div></div>
+        <pre><code></code></pre>
+      </form>
+
+      <script>
+      function postquestion()
+      {
+        var xhr = new XMLHttpRequest();
+        var url="http://127.0.0.1:8080/question/"+document.getElementById("qa_id2").value;
+        console.log(url)
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        var data = JSON.stringify({"text":document.getElementById("text").value,"asked_by_user":document.getElementById("asked_by_name").value});
+        xhr.send(data);
+        document.write(xhr.responseText);
+      }
+      </script>
+      <form onsubmit="return postquestion();">
+        <fieldset>
+          <legend>3. Ask a question</legend>
+          <input name="qa_id" id="qa_id2">
+          <input name="text" id="text">
+          <input name="asked_by_name" id="asked_by_name">
+          <button type="submit">POST</button>
+        </fieldset>
+        <div></div>
+        <a title="Clear">X</a>
+        <div></div>
+        <pre><code></code></pre>
+      </form>
+
+      <script>
+      function postanswer()
+      {
+        var xhr = new XMLHttpRequest();
+        var url="http://127.0.0.1:8080/answer/"+document.getElementById("ques_id").value;
+        console.log(url)
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        var data = JSON.stringify({"text":document.getElementById("answer_text").value,"image_url":document.getElementById("image_url").value,"answered_by":document.getElementById("answered_by").value});
+        console.log(data);
+        xhr.send(data);
+        document.write(xhr.responseText)
+      }
+      </script>
+      <form onsubmit="return postanswer();">
+        <fieldset>
+          <legend>4. Answer a question</legend>
+          <input name="question_id" id="ques_id">
+          <input name="text" id="answer_text">
+          <input name="image_url" id="image_url">
+          <input name="answered_by" id="answered_by">
+          <button type="submit">POST</button>
+        </fieldset>
+        <div></div>
+        <a title="Clear">X</a>
+        <div></div>
+        <pre><code></code></pre>
+      </form>
+
+      <script>
+      function getanswer()
+      {
+        //var xhr = new XMLHttpRequest();
+        var url="http://127.0.0.1:8080/qa/"+document.getElementById("qa_id3").value+"/questions";
+        var filter = document.getElementById("filter_by").value
+        if(filter != ""){
+          url = url+"?type="+filter
+        }
+        console.log(url);
+        location.href=url;
+        return false;
+      }
+      </script>
+      <form onsubmit="return getanswer();">
+        <fieldset>
+          <legend>5. Get Questions</legend>
+          <input name="qa_id" id="qa_id3">
+          <input name="filter_by" id="filter_by">
+          <button type="submit">GET</button>
+        </fieldset>
+        <div></div>
+        <a title="Clear">X</a>
+        <div></div>
+        <pre><code></code></pre>
+      </form>
+
+
+
+
+
+  </div>
+
+</body></html>
