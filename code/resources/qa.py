@@ -3,6 +3,7 @@ from models.qa import QaModel
 
 
 class Qa(Resource):
+    
     ##define request parser and fields to be parsed from the request body
     parser = reqparse.RequestParser()
     parser.add_argument('session_name')

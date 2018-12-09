@@ -12,8 +12,7 @@ class Question(Resource):
     parser.add_argument('asked_by_user',
                         required=True,
                         help="This field cannot be left blank!"
-                        )
-
+                        )        
     ##POST method
     def post(self,qa_id):
         session = QaModel.get_by_id(qa_id)
