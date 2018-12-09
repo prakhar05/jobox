@@ -14,28 +14,28 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 
-logging.basicConfig(filename='flask.log',level=logging.DEBUG)
-logging.getLogger('flask_cors').level = logging.DEBUG
+#logging.basicConfig(filename='flask.log',level=logging.DEBUG)
+#logging.getLogger('flask_cors').level = logging.DEBUG
 
 #initialise DB
 @app.before_first_request
 def create_tables():
     db.create_all()
 
-@app.before_request
-def log_request_info():
-    app.logger.debug('Headers: %s', request.headers)
-    app.logger.debug('Body: %s', request.get_data())
+#@app.before_request
+#def log_request_info():
+#    app.logger.debug('Headers: %s', request.headers)
+#    app.logger.debug('Body: %s', request.get_data())
 
-@app.after_request
-def after_request(response):
+#@app.after_request
+#def after_request(response):
     #response.headers.add('Content-Type','application/json')
     #response.headers.add('Access-Control-Allow-Origin', 'null')
     #response.headers.add('Access-Control-Allow-Headers', 'content-type')
     #response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    app.logger.debug('Response is')
-    app.logger.debug(response.headers)
-    return response
+#    app.logger.debug('Response is')
+#    app.logger.debug(response.headers)
+#    return response
 #    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
 
 #Set resource routes here

@@ -12,7 +12,7 @@ class Question(Resource):
     parser.add_argument('asked_by_user',
                         required=True,
                         help="This field cannot be left blank!"
-                        )        
+                        )
     ##POST method
     def post(self,qa_id):
         session = QaModel.get_by_id(qa_id)
@@ -43,12 +43,13 @@ class Question(Resource):
 
 class QuestionList(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('type')
+    parser.add_argument("type",location="args")
 
     ##GET method
     def get(self,qa_id):
         request_data = QuestionList.parser.parse_args()
-        questions = QuestionModel.get_all_by_id(qa_id,request_data["type"])
+        filter="all" if not request_data["type"] else request_data["type"]
+        questions = QuestionModel.get_all_by_id(qa_id,filter)
         questions_list = [question.json() for question in questions]
 
         if questions_list != []:
