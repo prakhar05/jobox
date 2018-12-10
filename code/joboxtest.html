@@ -55,12 +55,24 @@
       <h3>Testing</h3>
       <p>Form fields are sent to the server as JSON in POST requests. EX: the host_name and start_time fields are sent as {host_name: value, start_time: value}. ID fields may be sent as part of the URL depending on the endpoint. EX: qa_id = 1234 is included in the URL as /qa/1234</p>
       <p>If you see 'Access control...' type errors in the browser developer console, read the comments in the JavaScript source code of this HTML page regarding 'CORS'.</p>
-      <form action="http://127.0.0.1:8080/qa" enctype="application/json" method="post">
+      <script>
+      function postsession()
+      {
+        var url="http://127.0.0.1:8080/qa";
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        var data = JSON.stringify({"host_name":document.getElementById("host_name").value,"start_time":document.getElementById("start_time").value,"end_time":document.getElementById("end_time").value});
+        xhr.send(data);
+        document.write(xhr.responseText);
+      }
+      </script>
+      <form onsubmit="return postsession();">
         <fieldset>
           <legend>1. Create Q&amp;A Session</legend>
-          <input name="host_name" type="text">
-          <input name="start_time">
-          <input name="end_time">
+          <input name="host_name" type="text" id="host_name">
+          <input name="start_time" id="start_time">
+          <input name="end_time" id="end_time">
           <button type="submit">POST</button>
         </fieldset>
         <div></div>

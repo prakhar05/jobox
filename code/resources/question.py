@@ -53,6 +53,6 @@ class QuestionList(Resource):
         questions_list = [question.json() for question in questions]
 
         if questions_list != []:
-            return {"Questions": questions_list}, 201
+            return {"Questions": questions_list}, 200
         else:
             return {"message": "No questions found. Check if session exists, or check your filter criteria"}, 404

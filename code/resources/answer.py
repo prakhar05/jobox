@@ -2,7 +2,6 @@ from flask_restful import Resource, reqparse
 from models.question import QuestionModel
 
 class Answer(Resource):
-    
     ##define request parser and fields to be parsed from the request body
     parser = reqparse.RequestParser()
     parser.add_argument('text')
