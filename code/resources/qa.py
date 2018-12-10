@@ -32,7 +32,7 @@ class Qa(Resource):
         request_data = Qa.parser.parse_args()
 
         ##check for empty input
-        if request_data["host_user"] == "" or request_data["start_time"] == "" or request_data["end_time"] == "":
+        if request_data["host_name"] == "" or request_data["start_time"] == "" or request_data["end_time"] == "":
             return {"message":"Please fill all required fields, they cannot be empty"}, 400
 
         ##if no session name gives, define a default name
