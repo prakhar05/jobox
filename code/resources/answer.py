@@ -20,7 +20,7 @@ class Answer(Resource):
             return {"message":"Both fields 'text' and 'image_url' cannot be empty."}, 400
 
         if request_data["answered_by"] == "":
-            return return {"message":"Please fill all required fields, they cannot be empty"}, 400
+            return {"message":"Please fill all required fields, they cannot be empty"}, 400
 
         question = QuestionModel.get_by_id(question_id)
 
