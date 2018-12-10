@@ -19,6 +19,9 @@ class Answer(Resource):
         if not request_data["text"] and not request_data["image_url"]:
             return {"message":"Both fields 'text' and 'image_url' cannot be empty."}, 400
 
+        if request_data["answered_by"] == "":
+            return return {"message":"Please fill all required fields, they cannot be empty"}, 400
+
         question = QuestionModel.get_by_id(question_id)
 
         ##Allow answering a question if not already answered

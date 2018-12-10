@@ -24,6 +24,9 @@ class Question(Resource):
 
             request_data = Question.parser.parse_args()
 
+            if request_data["text"] == "" or request_data["asked_by_user"] == "":
+                return {"message":"Please fill all required fields, they cannot be empty"}, 400
+
             if QuestionModel.question_exists(qa_id,request_data["text"].strip(),request_data["asked_by_user"].strip()):
                 return {"message":"This question already exists for this session"}, 400
 
