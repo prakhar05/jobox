@@ -34,7 +34,7 @@ class QaModel(db.Model):
         except:
             return False
 
-        if endtime < starttime:
+        if endtime <= starttime:
             return False
 
         return True
